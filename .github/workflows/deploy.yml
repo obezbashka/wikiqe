@@ -3,31 +3,19 @@ name: Build and Publish My GitBook
 on:
   push:
     branches:
-      - 0  # Триггер на пуш в ветку main
+      - 0
 
 jobs:
   build-and-deploy:
-    runs-on: ubuntu-latest  # Выбираем операционную систему для работы
-
+    runs-on: ubuntu-latest
     steps:
-      # Шаг 1: Клонирование репозитория
       - name: Checkout code
         uses: actions/checkout@v2
 
-      # Шаг 2: Установка GitBook CLI
-      - name: Install GitBook CLI
-        run: |
-          npm install -g gitbook-cli
-
-      # Шаг 3: Сборка GitBook
-      - name: Build GitBook
-        run: |
-          gitbook install
-          gitbook build ./ ./_book
-
-      # Шаг 4: Деплой на GitHub Pages
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+      - name: Build and Deploy
+        uses: onejar99/gitbook-build-publish-action@v1.0.3
         with:
-          personal_token: ${{ secrets.GH_ACCESS_TOKEN }}  # Используем токен для аутентификации
-          publish_dir: ./_book  # Публикуем содержимое папки _book
+          MY_SECRET: ${{ secrets.GH_ACCESS_TOKEN }}
+          USER_NAME: 'obezbashka'
+          USER_EMAIL: 'terryry@mail.ru'
+          BOOK_DIR: '.'
