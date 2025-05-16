@@ -3,7 +3,7 @@ name: Build and Publish My GitBook
 on:
   push:
     branches:
-      - main
+      - 0
 
 jobs:
   build-and-deploy:
