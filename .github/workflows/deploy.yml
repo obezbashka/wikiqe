@@ -1,0 +1,21 @@
+name: Build and Publish My GitBook
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build and Deploy
+        uses: onejar99/gitbook-build-publish-action@v1.0.3
+        with:
+          MY_SECRET: ${{ secrets.GH_ACCESS_TOKEN }}
+          USER_NAME: 'obezbashka'
+          USER_EMAIL: 'terryry@mail.ru'
+          BOOK_DIR: '.'
